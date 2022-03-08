@@ -1,0 +1,68 @@
+---
+title: Exercice 2 : Diagramme de classe ({{ date | date('dddd, MMMM Do') }})
+---
+Réalisez un diagramme de classe correspondant au sujet (attributs et associations uniquement).
+
+---
+title: Exercice 3 : méthodes ({{ date | date('dddd, MMMM Do') }})
+---
+Ajoutez quelques méthodes utiles au cas d'utilisation "Envoyer les payes" comme `getPayeArtisan()` en vous demandant dans quelle classe il faut la mettre.
+```plantuml
+
+@startuml
+
+hide circle
+hide empty members
+hide empty methods
+
+skinparam classAttributeIconSize 0
+
+skinparam roundcorner 5
+
+skinparam class {
+    BackgroundColor AliceBlue
+    BorderColor DarkSlateGray
+    ArrowColor Black
+    FontColor Black
+    FontSize 12
+    FontName Helvetica
+}
+
+skinparam arrow {
+    MessageAlign center
+}
+
+class Entreprise{
+    - getPayeArtisan()
+}
+
+class Artisans{
+    + Salaire horaire
+    + coordonnees
+
+    - getSpecialite()
+    + chantierEffectue()
+}
+
+class Chantier{
+    + dateDeb
+    + dateFin
+    + adresse
+
+    + getNbArtisans()
+}
+
+Entreprise "1" -- "1..*" Artisans : Posséder
+Entreprise "1" -- "*" Chantier : Gérer
+
+Artisans "*" - "*" Chantier
+(Artisans, Chantier) .. Affecter
+
+class Affecter {
+    + nbHeuresEffectuees
+    + debutMission
+    + finMission
+}
+
+@enduml
+```
